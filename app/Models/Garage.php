@@ -39,15 +39,14 @@ class Garage extends Model
         return $this->hasMany(Rental::class);
     }
     
-    public function monthlyPriced(): float
+    public function monthlyPrice(): float
     {
-        return $this->daily_price * 25;
+        return (float) $this->daily_price * 25;
     }
 
     public function scopeAvailableOn(Builder $query, Carbon $date): Builder
     {
-        return $query->whereDoesntHave('rentals', fn (Builder $q) => 
-            $q->activeOnDate($date));
+        return $query->whereDoesntHave('rentals', fn (Builder $q) => $q->activeOn($date));
     }
 
 }

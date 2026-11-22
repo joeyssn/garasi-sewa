@@ -9,7 +9,9 @@ class RegisterRequest extends FormRequest
 {
     public function authorize(): bool
     {
-            return $this->user()?->isAdmin() ?? false;    }
+        // Anyone (a guest) may register as a tenant; admin approval happens afterwards.
+        return true;
+    }
 
     public function rules(): array
     {

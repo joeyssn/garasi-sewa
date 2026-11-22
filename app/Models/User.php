@@ -44,6 +44,15 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::Admin;
+    }
+
+    public function isTenant(): bool
+    {
+        return $this->role === UserRole::Tenant;
+    }
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class);
@@ -54,10 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(Rental::class);
     }
     
-    public function isAdmin(): bool
-    {
-        return $this->role === UserRole::Admin;
-    }
+  
     public function isApproved(): bool
     {
         return $this->status === UserStatus::Approved;
